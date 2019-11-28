@@ -26,10 +26,10 @@ def getcounts(filename):
     # for every line in the file, removes the /n and splits each word
     for line in file:
         line = line.strip()
-        words = line.split()
+        splitwords = line.split()
 
         # for every split word, it normalizes by the function
-        for word in words:
+        for word in splitwords:
             word = normalize(word)
 
             # if the word is already in the dictionary, adds onto the count
@@ -40,6 +40,7 @@ def getcounts(filename):
             else:
                 result_dict[word] = 1
 
+            # stores the number of word
             counts += 1
 
     result_dict["_total"] = counts
@@ -63,16 +64,16 @@ def predict():
     austen_total_score = 0
 
     uword = user_input.strip()
-    nword = uword.split()
+    split_uword = uword.split()
 
     #calculate the scores for each word that the user input
-    for word in nword:
-        word = normalize(word)
+    for word in split_uword:
+        findword = normalize(word)
 
-        shakespeare_score = get_score(word, shakespeare_counts)
+        shakespeare_score = get_score(findword, shakespeare_counts)
         shakespeare_total_score += shakespeare_score
         
-        austen_score = get_score(word, austen_counts)
+        austen_score = get_score(findword, austen_counts)
         austen_total_score += austen_score
 
     # checks which text the word has more relevance 
